@@ -1,0 +1,81 @@
+/* category.css */
+
+body {
+    background-color: #161616;
+    color: black;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('fone.png');
+    background-repeat: no-repeat; /* Запретить повторение изображения */
+    background-size: cover;
+    background-position: left;
+}
+
+.container {
+    max-width: 550px;
+    margin: 50px auto;
+}
+
+.card-container {
+    display: flex; /* Corrected value */
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+h1 {
+    color: orange;  /* Telegram blue color */
+    text-align: center;
+}
+
+.card {
+    max-width: 180px;
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    flex: 1 0 30%;  /* This will make the card take up 30% of the row */
+}
+
+.card:hover {
+    background-color: #191919;
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+.card-title {
+    color: #ffffff;
+}
+img{
+    min-width: 100%;
+}
+@media only screen and (max-width: 769px) {
+    /* Mobile styles */
+    h5 {
+        font-size: 18px;
+        text-align: center;
+    }
+    .card {
+        max-width: 200px;
+        background-color: #1a1a1a;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        flex: 1 0 30%;  /* This will make the card take up 30% of the row */
+    }
+    .col-md-4 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .card-body{
+        min-height: 250px;
+    }
+    .card-title {
+        margin-top: 15%;
+    }
+}
