@@ -37,6 +37,7 @@ def get_api_token():
     data = res.read()
     api_token = (json.loads(data.decode("utf-8")))
     api_token = dict(api_token)
+    print(api_token)
     api_token = api_token['api_token']
     return api_token
 
