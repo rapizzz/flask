@@ -107,10 +107,10 @@ def categ():
 
 @app.route('/test')
 def test():
-    try:
-        api_token = get_api_token()
+    api_token = get_api_token()
+    if api_token:
         return f"{api_token}"
-    except Exception as e:
-        return f"{e}"
+    else:
+        return "Ошибка получения"
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
