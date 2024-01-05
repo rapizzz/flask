@@ -16,17 +16,22 @@
         <div class="row card-container">
             {% for category in categories['categories'] %}
                 <div class="col-md-4">
-                    <li class="card mb-3" data-aos="fade-up">
+                    <div class="card mb-3" data-aos="fade-up" onclick="redirectToCategory('{{ category['category_id'] }}')">
                         <div class="card-body">
                             <img src="https://test.aspor.ua/image/{{ category['image'] }}" alt="{{ category['name'] }}">
                             <h5 class="card-title">{{ category['name'] }}</h5>
                         </div>
-                    </li>
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
-
+    <script>
+        function redirectToCategory(categoryId) {
+            var url = "/uacategory_id?uacategory_id=" + categoryId;
+            window.location.href = url;
+        }
+    </script>
     <!-- Add Bootstrap JS and Popper.js CDN scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

@@ -1,0 +1,21 @@
+<!-- categories.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="categories-container">
+        <h1>Categories</h1>
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="/uacategory_id?uacategory_id={{ category.category_id }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

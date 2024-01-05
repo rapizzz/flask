@@ -1,0 +1,31 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="products-container">
+        <h1>Products</h1>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-item">
+                    <h2>{{ product.name }}</h2>
+                    <p>{{ product.price }}</p>
+                    <p>{{ product.description }}</p>
+                    {% for image in product.image %}
+                        <img src="{{ image }}" alt="Product Image">
+                    {% endfor %}
+                    <div class="product-controls">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1">
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
