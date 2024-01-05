@@ -105,6 +105,8 @@ def categ():
     # Если категории не пустые
     return render_template('categories.html', categories=tovar_list["categories"])
 
-
+@app.route('/test')
+def test():
+    return "test"
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
