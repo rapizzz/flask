@@ -109,10 +109,8 @@ def categ():
 def test():
     try:
         api_token = get_api_token()
-        ret = api_token
-        return ret
+        return f"{api_token}"
     except Exception as e:
-        ret = e
-        return ret
+        return f"{e}"
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
