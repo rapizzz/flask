@@ -110,8 +110,9 @@ def test():
     try:
         api_token = get_api_token()
         ret = api_token
+        return ret
     except Exception as e:
         ret = e
-    return ret
+        return ret
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
