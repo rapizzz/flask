@@ -94,17 +94,19 @@ def home_ru():
 
 @app.route('/uacategory_id', methods=['GET'])
 def categ():
-    # Получаем значение параметра uacategory_id из запроса
-    category_id = request.args.get('uacategory_id')
-    print(category_id)
-    category_id = str(category_id)
-    tovar_list = get_tovar(category_id)
-    if not tovar_list["categories"]:  # Если категории пусты
-        return render_template('products.html', products=tovar_list["products"])
+    try:
+        # Получаем значение параметра uacategory_id из запроса
+        category_id = request.args.get('uacategory_id')
+        print(category_id)
+        category_id = str(category_id)
+        tovar_list = get_tovar(category_id)
+        if not tovar_list["categories"]:  # Если категории пусты
+            return render_template('products.html', products=tovar_list["products"])
 
-    # Если категории не пустые
-    return render_template('categories.html', categories=tovar_list["categories"])
-
+        # Если категории не пустые
+        return render_template('categories.html', categories=tovar_list["categories"])
+    except:
+        return "Нет товаров в данной категории!"
 @app.route('/test')
 def test():
     api_token = get_api_token()

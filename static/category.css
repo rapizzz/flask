@@ -1,12 +1,11 @@
 /* category.css */
 
 body {
-    background-color: #161616;
     color: black;
+    background-color: #1e1e1e;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('fone.png');
     background-repeat: no-repeat; /* Запретить повторение изображения */
     background-size: cover;
     background-position: left;
@@ -30,7 +29,7 @@ h1 {
 
 .card {
     max-width: 180px;
-    background-color: #1a1a1a;
+    background-color: #2F3763;
     border: none;
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -58,7 +57,7 @@ img{
     }
     .card {
         max-width: 200px;
-        background-color: #1a1a1a;
+        background-color: #2F3763;
         border: none;
         border-radius: 15px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);

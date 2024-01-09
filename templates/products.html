@@ -13,7 +13,16 @@
                 <div class="product-item" data-product-id="{{ product.product_id }}">
                     <img class="product-image" src="{{ product.image[0] }}" alt="Product Image">
                     <h4>{{ product.name }}</h4>
-                    <p class="product-price">{{ product.price }}</p>
+                    {% if product.price is defined %}
+                        {% set price_float = product.price|float %}
+                        {% if price_float %}
+                            <p class="product-price">{{ '%.2f'|format(price_float) }}$</p>
+                        {% else %}
+                            <p class="product-price">{{ product.price }}$</p>
+                        {% endif %}
+                    {% else %}
+                        <p class="product-price">{{ product.price }}$</p>
+                    {% endif %}
                     <button class="quantity-btn minus">-</button>
                     <span class="quantity">1</span>
                     <button class="quantity-btn plus">+</button>
