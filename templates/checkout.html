@@ -110,12 +110,12 @@
         function initializeTelegram() {
             let usercard = document.getElementById("usercard");
             let profName = document.createElement('h3');
-            profName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name} ${tg.initDataUnsafe.user.username} (${tg.initDataUnsafe.user.language_code})`;
+            profName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.username}`;
             profName.classList.add('user-info');
             usercard.appendChild(profName);
 
             let userid = document.createElement('h3');
-            userid.innerText = `${tg.initDataUnsafe.user.id}`;
+            userid.innerText = `${tg.initDataUnsafe.id}`;
             userid.classList.add('user-id');
             usercard.appendChild(userid);
 
