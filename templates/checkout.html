@@ -100,24 +100,18 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <h4></h4>
     <script>
-        // Ожидаем, что WebAppUser будет доступен после загрузки скрипта Telegram WebApp
-        window.addEventListener('telegramWebAppLoaded', function () {
-            // Получаем объект WebAppUser
-            const user = TelegramWebAppUser;
+        let usercard = document.getElementById("usercard"); // Получаем блок usercard
 
-            // Проверяем, чтобы убедиться, что объект существует
-            if (user) {
-                // Извлекаем необходимые данные
-                const userId = user.id;
-                const firstName = user.first_name;
+        let profName = document.createElement('h3'); // Создаем тег h3
+        profName.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name} ${tg.initDataUnsafe.user.username} (${tg.initDataUnsafe.user.language_code})`;
+        profName.classList.add('user-info'); // Добавляем класс 'user-info'
+        usercard.appendChild(profName); // Добавляем
 
-                // Выводим данные в HTML
-                const h1Element = document.querySelector('h4');
-                h1Element.textContent = `User ID: ${userId} - First Name: ${firstName}`;
-            } else {
-                console.error('TelegramWebAppUser object not found.');
-            }
-        });
+        let userid = document.createElement('h3'); // Создаем еще тег h3
+        userid.innerText = `${tg.initDataUnsafe.user.id}`; // Показываем user_id
+        userid.classList.add('user-id'); // Добавляем класс 'user-id'
+        usercard.appendChild(userid); // Добавляем
+
     </script>
 </body>
 </html>
