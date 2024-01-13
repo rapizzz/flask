@@ -53,13 +53,14 @@
     <script src="{{ url_for('static', filename='checkout.js') }}"></script>
     <script>
         async function getNovaPostSuggestions(query) {
-            const apiKey = "1e66e8927bbba3e04b8738bac371f426";
-            const url = `https://api.novapost.com/v.1.0/divisions?query=${encodeURIComponent(query)}&limit=5`;
+            const apiKey = "574fbab8b16065351da4de2c094b7088";
+            const url = `https://api.novaposhta.ua/v2.0/divisions?query=${encodeURIComponent(query)}&limit=5`;
 
             try {
                 const response = await fetch(url, {
                     headers: {
                         'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json',  // Добавлен Content-Type
                     },
                 });
 
