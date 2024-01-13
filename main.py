@@ -112,6 +112,8 @@ def checkout():
     return render_template('checkout.html')
 @app.route('/test')
 def test():
+    # Получаем IP-адрес из объекта request
+    ip_address = request.remote_addr
     return f"{ip_address}"
 
 
