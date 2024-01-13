@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='order.css') }}">
 </head>
 <body>
     <div class="products-container">
@@ -12,7 +13,7 @@
             {% for product in products %}
                 <div class="product-item" data-product-id="{{ product.product_id }}">
                     <img class="product-image" src="{{ product.image[0] }}" alt="Product Image">
-                    <h4>{{ product.name }}</h4>
+                    <h5>{{ product.name }}</h5>
                     {% if product.price is defined %}
                         {% set price_float = product.price|float %}
                         {% if price_float %}
@@ -23,21 +24,19 @@
                     {% else %}
                         <p class="product-price">{{ product.price }}$</p>
                     {% endif %}
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity">1</span>
-                    <button class="quantity-btn plus">+</button>
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="show-details">Details</button>
+                    <div class="product-controls">
+{#                        <div class="quantity-controls">#}
+{#                            <button class="quantity-btn minus">-</button>#}
+{#                            <span class="quantity">1</span>#}
+{#                            <button class="quantity-btn plus">+</button>#}
+{#                        </div>#}
+                        <button class="add-to-cart" onclick="addToCart('{{ product.product_id }}', '{{ product.name }}', {{ product.price }})">Add to Cart</button>
+                    </div>
+{#                    <button class="show-details">Info</button>#}
                 </div>
             {% endfor %}
         </div>
     </div>
-
-    <div class="cart-info">
-        <div class="total">Total: $0.00</div>
-        <button class="checkout">Checkout</button>
-    </div>
-
     <div class="product-details-popup">
         <div class="slider">
             <!-- Add your slider content here -->
@@ -50,8 +49,17 @@
         </div>
         <button class="close-popup">Close</button>
     </div>
-
+     <!-- Корзина -->
+    <div class="cart-container">
+        <ul id="cart-items" style="display: none;">
+            {% for item in cart %}
+                <li>{{ item.product_id }} - {{ item.name }} - ${{ item.price }} - Quantity: {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <button class="checkout" onclick="openCheckout()">${{ total }}</button>
+    </div>
+    <script src="{{ url_for('static', filename='order.js') }}"></script>
+    <!-- /Корзина -->
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>

@@ -1,0 +1,48 @@
+/* ... existing styles ... */
+
+/* Обновленный стиль для корзины */
+.cart-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ширина на всю ширину экрана */
+    background-color: #28a745;
+    border: none;
+    color: #333;
+    backdrop-filter: blur(10px);
+    max-width: 100%; /* Убираем ограничение максимальной ширины */
+}
+
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-container h2 {
+    margin-bottom: 10px;
+    font-size: 1.8em; /* Увеличиваем размер заголовка */
+    color: #555;
+}
+
+.cart-container .total {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.cart-container button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 15px 20px; /* Увеличиваем отступы кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 100%;
+    font-size: 16px;
+}
+
+.cart-container button:hover {
+    background-color: #218838;
+}

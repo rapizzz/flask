@@ -107,12 +107,8 @@ def categ():
         return render_template('categories.html', categories=tovar_list["categories"])
     except:
         return "Нет товаров в данной категории!"
-@app.route('/test')
-def test():
-    api_token = get_api_token()
-    if api_token:
-        return f"{api_token}"
-    else:
-        return "Ошибка получения"
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))

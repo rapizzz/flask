@@ -72,9 +72,10 @@ img{
         padding-right: 5px;
     }
     .card-body{
-        min-height: 250px;
+        min-height: 213px;
     }
     .card-title {
-        margin-top: 15%;
+        margin-top: 30%;
+
     }
 }

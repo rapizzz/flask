@@ -7,6 +7,7 @@
     <!-- Add Bootstrap CSS CDN link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='category.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='order.css') }}">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -26,7 +27,17 @@
             {% endfor %}
         </div>
     </div>
-
+    <!-- Корзина -->
+    <div class="cart-container">
+        <ul id="cart-items" style="display: none;">
+            {% for item in cart %}
+                <li>{{ item.product_id }} - {{ item.name }} - ${{ item.price }} - Quantity: {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <button class="checkout" onclick="openCheckout()">${{ total }}</button>
+    </div>
+    <script src="{{ url_for('static', filename='order.js') }}"></script>
+    <!-- /Корзина -->
     <!-- Add Bootstrap JS and Popper.js CDN scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

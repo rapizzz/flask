@@ -1,0 +1,134 @@
+/* checkout.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e1e; /* Dark background color */
+    color: #fff; /* Light text color */
+    margin: 0;
+}
+.subdiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Ширина на всю ширину экрана */
+    border: none;
+    color: #333;
+    max-width: 100%; /* Убираем ограничение максимальной ширины */
+}
+
+#cart-items input {
+    max-width: 100%;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+#cart-items button {
+    max-width: 100%;
+    font-size: 14px;
+    text-align: center;
+    /* Добавляем эти стили для центрирования */
+    display: block;
+    margin: auto;
+}
+
+#cart-items {
+
+}
+.checkout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.cart-details {
+    max-width: 100%;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.cart-details th,
+.cart-details td {
+    overflow: hidden; /* Prevent content from overflowing */
+    text-overflow: ellipsis; /* Show an ellipsis for truncated text */
+    /*white-space: nowrap; !* Don't wrap text *!*/
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+        color: #fff;
+    }
+
+input {
+    background-color: #2e2e2e;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Стили для выпадающего списка с предложениями городов */
+.autocomplete-container {
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    background-color: #2e2e2e;
+    border: 1px solid #555;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1;
+    width: 100%;
+}
+
+.autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete-item:hover {
+    background-color: #555;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #2c2c2c; /* Darker background color for table header */
+}
+
+.total {
+    margin-top: 20px;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+button {
+    background-color: #007bff; /* Telegram Blue */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 100%;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker Telegram Blue on hover */
+}

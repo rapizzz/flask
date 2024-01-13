@@ -8,9 +8,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='category.css') }}">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='order.css') }}">
+    <style>
+        .limit-lines {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+    </style>
 </head>
 <body>
-
     <div class="container">
         <h1>Каталог</h1>
         <div class="row card-container">
@@ -19,13 +28,24 @@
                     <div class="card mb-3" data-aos="fade-up" onclick="redirectToCategory('{{ category['category_id'] }}')">
                         <div class="card-body">
                             <img src="https://test.aspor.ua/image/{{ category['image'] }}" alt="{{ category['name'] }}">
-                            <h5 class="card-title">{{ category['name'] }}</h5>
+                            <h5 class="card-title limit-lines">{{ category['name'] }}</h5>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+    <!-- Корзина -->
+    <div class="cart-container">
+        <ul id="cart-items" style="display: none;">
+            {% for item in cart %}
+                <li>{{ item.product_id }} - {{ item.name }} - ${{ item.price }} - Quantity: {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <button class="checkout" onclick="openCheckout()">${{ total }}</button>
+    </div>
+    <script src="{{ url_for('static', filename='order.js') }}"></script>
+    <!-- /Корзина -->
     <script>
         function redirectToCategory(categoryId) {
             var url = "/uacategory_id?uacategory_id=" + categoryId;
@@ -36,6 +56,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </body>
 </html>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
