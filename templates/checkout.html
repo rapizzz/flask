@@ -49,7 +49,7 @@
             </div>
         </form>
     </div>
-    <h3></h3>
+    <div id="usercard"></div>
     <script src="{{ url_for('static', filename='checkout.js') }}"></script>
     <script>
         async function getNovaPostSuggestions(query) {
@@ -99,6 +99,12 @@
     </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        function openNewWindow(userId, userInfo) {
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`<h3>User ID: ${userId}</h3>`);
+            newWindow.document.write(`<h3>User Info: ${userInfo}</h3>`);
+        }
+
         window.addEventListener('telegramWebAppLoaded', function () {
             // Ваш код, использующий tg, здесь
             let usercard = document.getElementById("usercard");
@@ -111,6 +117,14 @@
             userid.innerText = `${tg.initDataUnsafe.user.id}`;
             userid.classList.add('user-id');
             usercard.appendChild(userid);
+
+            // Вывод в консоль при установлении соединения с профилем
+            console.log('Connection with the user profile established.');
+
+            // Проверка наличия Telegram и открытие нового окна
+            if (typeof tg !== 'undefined') {
+                openNewWindow(tg.initDataUnsafe.user.id, profName.innerText);
+            }
         });
     </script>
 </body>
