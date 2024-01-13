@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="checkout-container">
-        <h2>Checkout</h2>
+        <h2 style="text-align: center">Order</h2>
         <form onsubmit="submitOrder(event)">
             <label for="phoneNumber">Тел:</label>
             <input type="text" id="phoneNumber" name="phoneNumber" required>
@@ -39,6 +39,9 @@
                 <tbody id="cart-items">
                 </tbody>
             </table>
+            <div style="border-radius: 10%; background-color: #2980b9; position: fixed; top: 1%; left: 1%; width: 60px; height: 40px; display: flex; justify-content: center; align-items: center;" class="back">
+                <a style="color: white; font-size: 48px; text-decoration: none;" href="/">⟸</a>
+            </div>
             <div class="subdiv">
                 <button type="submit" onclick="openCheckout()">
                     <span class="total">Order $<span id="cart-total">0.00</span></span>
@@ -46,6 +49,7 @@
             </div>
         </form>
     </div>
+    <h3></h3>
     <script src="{{ url_for('static', filename='checkout.js') }}"></script>
     <script>
         async function getNovaPostSuggestions(query) {
@@ -91,6 +95,28 @@
                 });
                 autocompleteItems.appendChild(item);
             });
+        });
+    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <h4></h4>
+    <script>
+        // Ожидаем, что WebAppUser будет доступен после загрузки скрипта Telegram WebApp
+        window.addEventListener('telegramWebAppLoaded', function () {
+            // Получаем объект WebAppUser
+            const user = TelegramWebAppUser;
+
+            // Проверяем, чтобы убедиться, что объект существует
+            if (user) {
+                // Извлекаем необходимые данные
+                const userId = user.id;
+                const firstName = user.first_name;
+
+                // Выводим данные в HTML
+                const h1Element = document.querySelector('h4');
+                h1Element.textContent = `User ID: ${userId} - First Name: ${firstName}`;
+            } else {
+                console.error('TelegramWebAppUser object not found.');
+            }
         });
     </script>
 </body>

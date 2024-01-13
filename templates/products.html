@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="products-container">
-        <h1>Products</h1>
+        <h1 style="text-align: center">Товари</h1>
         <div class="product-grid">
             {% for product in products %}
                 <div class="product-item" data-product-id="{{ product.product_id }}">
@@ -48,6 +48,9 @@
             {% endfor %}
         </div>
         <button class="close-popup">Close</button>
+    </div>
+    <div style="border-radius: 10%; background-color: #2980b9; position: fixed; top: 1%; left: 1%; width: 60px; height: 40px; display: flex; justify-content: center; align-items: center;" class="back">
+        <a style="color: white; font-size: 48px; text-decoration: none;" href="/">⟸</a>
     </div>
      <!-- Корзина -->
     <div class="cart-container">

@@ -35,7 +35,7 @@
             margin-bottom: 10px;
         }
 
-        a {
+        .catlink {
             display: block;
             padding: 15px;
             text-decoration: none;
@@ -46,7 +46,7 @@
             transition: background-color 0.3s ease;
         }
 
-        a:hover {
+        .catlink:hover {
             background-color: #2980b9;
         }
         h1 {
@@ -57,15 +57,19 @@
 </head>
 <body>
     <div class="categories-container">
-        <h1>Categories</h1>
+        <h1 style="text-align: center">Категорії</h1>
         <ul>
             {% for category in categories %}
                 <li>
-                    <a href="/uacategory_id?uacategory_id={{ category.category_id }}">{{ category.name }}</a>
+                    <a class="catlink" href="/uacategory_id?uacategory_id={{ category.category_id }}">{{ category.name }}</a>
                 </li>
             {% endfor %}
         </ul>
     </div>
+    <div style="border-radius: 10%; background-color: #2980b9; position: fixed; top: 1%; left: 1%; width: 60px; height: 40px; display: flex; justify-content: center; align-items: center;" class="back">
+        <a style="color: white; font-size: 48px; text-decoration: none;" href="/">⟸</a>
+    </div>
+
     <!-- Корзина -->
     <div class="cart-container">
         <ul id="cart-items" style="display: none;">
