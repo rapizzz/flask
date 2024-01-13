@@ -110,5 +110,10 @@ def categ():
 @app.route('/checkout')
 def checkout():
     return render_template('checkout.html')
+@app.route('/test')
+def test():
+    return f"{ip_address}"
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
