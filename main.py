@@ -110,12 +110,23 @@ def categ():
 @app.route('/checkout')
 def checkout():
     return render_template('checkout.html')
+
+def get_public_ip():
+    try:
+        # Используем сторонний сервис для получения внешнего IP
+        response = requests.get('https://api64.ipify.org?format=json')
+        ip_data = response.json()
+        return ip_data.get('ip')
+    except Exception as e:
+        print(f"Error getting public IP: {e}")
+        return None
+
 @app.route('/test')
 def test():
-    # Получаем IP-адрес из объекта request
-    ip_address = request.remote_addr
-    return f"{ip_address}"
-
+    # Получаем внешний IP
+    public_ip = get_public_ip()
+    if public_ip:
+        return f"{public_ip}"
 
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
