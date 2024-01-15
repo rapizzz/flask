@@ -8,7 +8,6 @@ import http.client
 from urllib.parse import unquote
 import json
 import sys
-from flask_cors import CORS
 
 def get_internal_ip():
     try:
