@@ -5,8 +5,10 @@ import sys
 from flask import Flask, render_template, url_for, request, jsonify, render_template_string
 import socket
 import http.client
+from urllib.parse import unquote
 import json
 import sys
+from flask_cors import CORS
 
 def get_internal_ip():
     try:
@@ -82,6 +84,35 @@ def index():
     print(categories)
     user_name = "Your User Name"  # Replace with the actual user name
     return render_template("index_ua.html", user_name=user_name, categories=categories)
+
+@app.route('/novapost/<path:path>', methods=['GET'])
+def proxy_novapost(path):
+    query_string = request.query_string.decode('utf-8')
+    full_path = path + '?' + query_string
+    print(full_path)
+    novapost_url = 'https://api.novapost.ua/v2.0/json/' + full_path
+    print(novapost_url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0',
+    }
+    print(request.args)
+    api = "574fbab8b16065351da4de2c094b7088"
+    param = {
+        "modelName": "Address",
+        "calledMethod": "getCities",
+        "methodProperties": {
+            "Ref": "ebc0eda9-93ec-11e3-b441-0050568002cf"
+        },
+        "apiKey": api
+    }
+    try:
+        response = requests.post(novapost_url, json=param, headers=headers)
+        print(response)
+        response.raise_for_status()  # Генерировать исключение, если ответ содержит ошибку HTTP
+        return response.json(), response.status_code
+    except requests.exceptions.RequestException as e:
+        print(f"Request to {novapost_url} failed: {str(e)}")
+        return {'error': str(e)}, 500
 
 
 @app.route('/ru')

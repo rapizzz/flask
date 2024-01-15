@@ -1,0 +1,10 @@
+{
+  "/novapost": {
+    "target": "https://api.novapost.ua",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/novapost": ""
+    }
+  }
+}
