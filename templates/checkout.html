@@ -7,6 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='checkout.css') }}">
+    <style>
+        .autocomplete-items {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #ddd;
+        }
+
+    </style>
 </head>
 <body>
     <div class="checkout-container">
@@ -19,12 +36,13 @@
             <input type="text" id="fullName" name="fullName" required>
 
             <label for="address">Адрес НП:</label>
-            <!-- Добавлены классы для обработки с помощью JavaScript -->
             <div class="autocomplete-container">
-                <input type="text" id="address" name="address" required class="autocomplete-input">
+                <input type="text" id="address" name="address" required class="autocomplete-input" oninput="autocompleteAddress(this.value)">
                 <div class="autocomplete-items" id="autocomplete-items"></div>
             </div>
-
+            <datalist id="cityList"></datalist>
+            <label for="np">№ Отделения:</label>
+            <input type="text" id="novaposta" name="posta" required>
             <!-- Cart details table for better layout -->
             <table class="cart-details">
                 <thead>
@@ -40,7 +58,7 @@
                 </tbody>
             </table>
             <div style="border-radius: 10%; background-color: #2980b9; position: fixed; top: 1%; left: 1%; width: 60px; height: 40px; display: flex; justify-content: center; align-items: center;" class="back">
-                <a style="color: white; font-size: 48px; text-decoration: none;" href="/">⟸</a>
+                <a style="color: white; font-size: 48px; text-decoration: none;" href="/rega">⟸</a>
             </div>
             <div class="subdiv">
                 <button type="submit" onclick="openCheckout()">
@@ -130,6 +148,101 @@
             // Если документ еще загружается, добавляем слушатель события загрузки
             document.addEventListener('DOMContentLoaded', initializeTelegram);
         }
+    </script>
+    <script>
+        function submitOrder() {
+            const userId = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : null;
+
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const address = document.getElementById('address').value;
+            const novpost = document.getElementById('novaposta').value;
+            const cartItems = document.querySelectorAll('#cart-items tr');
+            const orderDetails = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderData = {
+                user_id: userId,
+                fullName,
+                phoneNumber,
+                city: `${address}`,
+                address: `${address} Відділення: ${novpost}`,  // ИСПРАВЛЕНИЕ В ЭТОЙ СТРОКЕ
+                orderDetails
+            };
+
+
+            // Send orderData to Flask backend
+            fetch('/submit_order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Order submitted successfully:', data);
+                // Handle success, e.g., show a success message or redirect to a thank you page
+            })
+            .catch(error => {
+                console.error('Error submitting order:', error);
+                // Handle error, e.g., show an error message to the user
+            });
+            // Clear the cart after checkout
+            cart = [];
+            updateCart();
+        }
+    </script>
+    <script>
+        let autocompleteTimeout; // Переменная для хранения таймаута
+
+        // Функция для отправки запросов к вашему Flask-приложению
+        async function fetchAddresses(query) {
+            try {
+                const response = await fetch(`/novapost/divisions?query=${query}`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching addresses:', error);
+            }
+        }
+
+        // Функция для автозаполнения адресов
+        async function autocompleteAddress(query) {
+            const autocompleteItems = document.getElementById('autocomplete-items');
+            autocompleteItems.innerHTML = ''; // Очистить предыдущие предложения
+
+            if (query.trim() === '') {
+                return;
+            }
+
+            clearTimeout(autocompleteTimeout); // Очистить предыдущий таймаут
+
+            // Установить новый таймаут для запроса с небольшой задержкой
+            autocompleteTimeout = setTimeout(async () => {
+                const addresses = await fetchAddresses(query);
+
+                if (addresses && addresses.length > 0) {
+                    addresses.forEach((address) => {
+                        const option = document.createElement('div');
+                        option.textContent = address;
+                        option.addEventListener('mousedown', (event) => {
+                            event.preventDefault(); // Предотвратить выделение текста
+                            document.getElementById('address').value = address;
+                            autocompleteItems.innerHTML = ''; // Очистить предложения после выбора
+                        });
+                        autocompleteItems.appendChild(option);
+                    });
+                }
+            }, 300); // Измените значение задержки по вашему усмотрению
+        }
+
+        // Дополнительный обработчик события для скрытия предложений при клике вне области
+        document.addEventListener('click', (event) => {
+            const autocompleteContainer = document.querySelector('.autocomplete-container');
+            if (!autocompleteContainer.contains(event.target)) {
+                document.getElementById('autocomplete-items').innerHTML = '';
+            }
+        });
+
     </script>
 </body>
 </html>
